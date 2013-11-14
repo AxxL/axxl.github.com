@@ -1,0 +1,75 @@
+
+c:/inetpub/wwwroot/axxl.github.com/.git/COMMIT_EDITMSG,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/FETCH_HEAD,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/HEAD,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/config,30
+	repositoryformatversion 2,7
+
+c:/inetpub/wwwroot/axxl.github.com/.git/description,24
+Unnamed repository;1,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/applypatch-msg.sample,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/commit-msg.sample,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/post-commit.sample,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/post-receive.sample,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/post-update.sample,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/pre-applypatch.sample,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/pre-commit.sample,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/pre-push.sample,15
+remote=22,770
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/pre-rebase.sample,16
+publish=18,587
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/prepare-commit-msg.sample,16
+  merge,24,859
+
+c:/inetpub/wwwroot/axxl.github.com/.git/hooks/update.sample,78
+refname=28,930
+allowunannotated=46,1316
+zero=63,1897
+	newrev_type=65,1978
+
+c:/inetpub/wwwroot/axxl.github.com/.git/index,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/info/exclude,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/logs/HEAD,143
+0000000000000000000000000000000000000000 7878cfc5b94f5687fedaa01495b2f6ae215ab5e4 esride-axs <a.schaefer@esri.de> 1384442789 +0100	commit 1,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/logs/refs/heads/master,143
+0000000000000000000000000000000000000000 7878cfc5b94f5687fedaa01495b2f6ae215ab5e4 esride-axs <a.schaefer@esri.de> 1384442789 +0100	commit 1,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/logs/refs/remotes/origin/master,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/objects/78/78cfc5b94f5687fedaa01495b2f6ae215ab5e4,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/objects/f9/3e3a1a1525fb5b91020da86e44810c87a2d7bc,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/refs/heads/master,0
+
+c:/inetpub/wwwroot/axxl.github.com/.git/refs/remotes/origin/master,0
+
+c:/inetpub/wwwroot/axxl.github.com/README.md,0
+
+c:/inetpub/wwwroot/axxl.github.com/apps/js-api_black_ago_map/index.html,38
+blackmap: inverted gray basemap6,192
+
+c:/inetpub/wwwroot/axxl.github.com/apps/js-api_black_ago_map/main.js,13
+var map;1,0
+
+c:/inetpub/wwwroot/axxl.github.com/apps/js-api_black_ago_map/styles.css,26
+html,1,0
+html, body,1,0
