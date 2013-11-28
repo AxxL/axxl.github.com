@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo 4</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+    <link rel="stylesheet" href="../css/style.css"/>
+
+    <!-- Here is the style definition to create the sepia effect -->
+    <style>
+        #mapDiv img {
+            -webkit-filter: brightness(90%) sepia(30%) !important;
+        }
+    </style>
+</head>
+
+<script src="http://js.arcgis.com/3.7/"></script>
+
+<script>
+    require([
+        "dojo/ready",
+        "esri/map",
+        "esri/layers/FeatureLayer"
+
+    ], function (Ready, Map, FeatureLayer) {
+        var addressUrl = "http://services.arcgis.com/OLiydejKCZTGhvWg/arcgis/rest/services/AdressMatchedTrees/FeatureServer/0",
+                cityUrl = "http://services.arcgis.com/OLiydejKCZTGhvWg/arcgis/rest/services/CityMatchedTrees/FeatureServer/0",
+                addressLayer,
+                cityLayer,
+                esriMap;
+
+        // Define a new map
+        esriMap = new Map("mapDiv", {
+            center: [11.5, 48.7],
+            zoom: 5,
+            basemap: "gray"
+        });
+
+        // Create FeatureLayers, the default mode is ONDEMAND
+        // Caching and tiling the geometries is done automatically,
+        // also feature generalization (in case of lines and polgons)
+        addressLayer = new FeatureLayer(addressUrl, {outFields: ["P_NBTREES"]});
+        addressLayer.setOpacity(0.5);
+        cityLayer = new FeatureLayer(cityUrl, {outFields: ["P_NBTREES"]});
+        cityLayer.setOpacity(0.5);
+        // add layers to the map
+        esriMap.addLayers([addressLayer, cityLayer]);
+    });
+</script>
+
+<body class="front">
+
+<div class="menuBar">
+    <div class="menu"><a href="./demo1.html">Demo 1</a></div>
+    <div class="menu"><a href="./demo2.html">Demo 2</a></div>
+    <div class="menu"><a href="./demo3.html">Demo 3</a></div>
+    <div class="menu"><a href="./demo4.html">Demo 4</a></div>
+    <div class="menu"><a href="./demo5.html">Demo 5</a></div>
+</div>
+
+<div id="container">
+
+    <div id="mapDiv" class="map_plus_content">
+    </div>
+
+    <div id="content" class="stmcontent">
+        <div id="header">Demo 4 - FeatureLayer</div>
+        <div id="help">
+            <p>Plus:</p>
+            <ul>
+                <li>different modes:</li>
+                <li>SNAPSHOT, ONDEMAND*, SELECTION</li>
+                <li>*geometries will be generalized</li>
+                <li>*geometries will be cached</li>
+                <li>*geometries come in tiles</li>
+            </ul>
+            <p>Minus:</p>
+            <ul>
+                <li>you need a ArcGIS Online subscription, or</li>
+                <li>an ArcGIS for Server</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

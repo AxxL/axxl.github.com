@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo 1</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+    <link rel="stylesheet" href="../css/style.css"/>
+
+    <!-- Here is the style definition to create the sepia effect -->
+    <style>
+        #mapDiv img {
+            -webkit-filter: brightness(90%) sepia(30%) !important;
+        }
+    </style>
+
+</head>
+
+<script src="http://js.arcgis.com/3.7/"></script>
+
+<script>
+
+    require([
+        "dojo/ready",
+        "esri/map"
+    ], function (Ready, Map) {
+
+        Ready(function () {
+            // Create a new map with the "gray canvas" basemap.
+            var esriMap = new Map("mapDiv", {
+                center: [11.5, 48.7],
+                zoom: 5,
+                basemap: "gray"
+            });
+        });
+    });
+
+</script>
+
+<body class="front">
+
+<div class="menuBar">
+    <div class="menu"><a href="./demo1.html">Demo 1</a></div>
+    <div class="menu"><a href="./demo2.html">Demo 2</a></div>
+    <div class="menu"><a href="./demo3.html">Demo 3</a></div>
+    <div class="menu"><a href="./demo4.html">Demo 4</a></div>
+    <div class="menu"><a href="./demo5.html">Demo 5</a></div>
+</div>
+
+<div id="container">
+
+    <div id="mapDiv" class="map_plus_content">
+    </div>
+
+    <div id="content" class="stmcontent">
+        <div id="header">Demo 1 - CSS3 Filter</div>
+        <div id="help">
+            <p>Plus:</p>
+            <ul>
+                <li>easy manipulation of existing maps</li>
+            </ul>
+            <p>Minus:</p>
+            <ul>
+                <li>only in webkit browsers</li>
+            </ul>
+            <p><a href="http://net.tutsplus.com/tutorials/html-css-techniques/say-hello-to-css3-filters/" target="_blank">Say Hello to CSS Filters</a></p>
+            <p><a href="http://caniuse.com/#feat=css-filters" target="_blank">Can I use</a></p>
+            <p><a href="http://odoe.net/blog/?p=322" target="_blank">CSS Filters and your ESRI tiles</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

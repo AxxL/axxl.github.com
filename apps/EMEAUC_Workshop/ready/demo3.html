@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo 3</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+    <link rel="stylesheet" href="../css/style.css"/>
+
+    <!-- Here is the style definition to create the sepia effect -->
+    <style>
+        #mapDiv img {
+            -webkit-filter: brightness(90%) sepia(30%) !important;
+        }
+    </style>
+</head>
+
+<script src="http://js.arcgis.com/3.7/"></script>
+
+<script>
+    require([
+        "dojo/ready",
+        "esri/map",
+        "esri/arcgis/utils",
+        "esri/layers/FeatureLayer"
+
+    ], function (Ready, Map, Utils, FeatureLayer) {
+        Ready(function () {
+
+            // Get the item from ArcGIS Online and read the content. Take care that the item ist public.
+            Utils.getItem("e6f2756610df44638332040ad3388fe0").then(function (response) {
+
+                // Read information from response
+                var countryLayer = response.itemData.operationalLayers[0];
+
+                // Create a new FeatureLayer and add the complete FeatureCollection
+                featureLayer = new FeatureLayer(countryLayer.featureCollection.layers[0]);
+                featureLayer.setOpacity(.7);
+
+                // Create a new map with no basemap and add featurelayer
+                esriMap = new Map("mapDiv");
+                esriMap.addLayer(featureLayer);
+
+                // Loop through all countries and create an array of country names
+                countryList = [];
+                for (i = 0; i < featureLayer.graphics.length; i++) {
+                    countryList.push(featureLayer.graphics[i].attributes.en);
+                }
+                countryList.sort();
+                placeHolder.innerHTML = countryList.toString().replace(/,/g, ", ");
+
+            });
+        });
+    });
+</script>
+
+<body class="front">
+
+<div class="menuBar">
+    <div class="menu"><a href="./demo1.html">Demo 1</a></div>
+    <div class="menu"><a href="./demo2.html">Demo 2</a></div>
+    <div class="menu"><a href="./demo3.html">Demo 3</a></div>
+    <div class="menu"><a href="./demo4.html">Demo 4</a></div>
+    <div class="menu"><a href="./demo5.html">Demo 5</a></div>
+</div>
+
+<div id="container">
+
+    <div id="mapDiv" class="map_plus_content">
+    </div>
+
+    <div id="content" class="stmcontent">
+        <div id="header">Demo 3 - FeatureCollection</div>
+        <div id="placeHolder" style="width: 340px; height: 500px;overflow:hidden; font-size: 11px; color: dimgray; padding: 10px"></div>
+    </div>
+</div>
+</body>
+</html>

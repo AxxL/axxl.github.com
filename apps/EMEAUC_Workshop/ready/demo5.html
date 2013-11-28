@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo 5</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+    <link rel="stylesheet" href="../css/style.css"/>
+
+    <!-- Here is the style definition to create the sepia effect -->
+    <style>
+        #mapDiv img {
+            -webkit-filter: brightness(90%) sepia(30%) !important;
+        }
+
+        #placeHolder div {
+            float: left;
+            border: solid 1px rgba(0, 0, 0, 0);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<script>
+    dojoConfig = {
+        parseOnload: false,
+        async: true,
+        packages: [
+            {
+                name: "thinkmaps", location: location.pathname.replace(/[^\/]+$/, '') + "../thinkmaps"
+            }
+        ]
+    };
+</script>
+
+<script src="http://js.arcgis.com/3.7/"></script>
+
+<script>
+
+    require([
+        "dojo/ready",
+        "dojo/_base/Color",
+        "dojo/dom-geometry",
+        "esri/map",
+        "esri/arcgis/utils",
+        "esri/layers/FeatureLayer",
+        "esri/symbols/SimpleFillSymbol",
+        "esri/symbols/SimpleLineSymbol",
+        "esri/geometry/Point",
+        "esri/graphic",
+        "thinkmaps/mapArrow"
+    ], function (Ready, Color, DomGeometry, Map, Utils, FeatureLayer, SimpleFillSymbol, SimpleLineSymbol, Point, Graphic, MapArrow) {
+        Ready(function () {
+            var esriMap, featureLayer, countryList;
+            var graphicFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                            new Color([100, 100, 100, 0.7]), 1), new Color([150, 150, 150, 0.7])
+            );
+
+            Utils.getItem("e6f2756610df44638332040ad3388fe0").then(function (response) {
+
+                // Read information from response
+                var countryLayer = response.itemData.operationalLayers[0];
+                featureLayer = new FeatureLayer(countryLayer.featureCollection.layers[0]);
+                featureLayer.setOpacity(.7);
+
+                // Create a new map with no basemap and add featurelayer from AGOL
+                esriMap = new Map("mapDiv");
+                esriMap.addLayer(featureLayer);
+
+                // Loop through all countries and create an array of country names
+                countryList = [];
+
+                var country;
+                for (var i = 0; i < featureLayer.graphics.length; i++) {
+                    country = featureLayer.graphics[i].attributes.en;
+
+                    var newDiv = document.createElement("div");
+                    newDiv.addEventListener("mouseover", show, false);
+                    newDiv.addEventListener("mouseout", hide, false);
+                    newDiv.appendChild(document.createTextNode(country));
+                    placeHolder.appendChild(newDiv);
+                    countryList.push(country);
+                }
+            });
+
+            function show(evt) {
+                var pageElement = getEventTarget(evt);
+
+                // Highlight page element
+                pageElement.style.border = "solid 1px rgba(255,0,0,0.8)";
+                var x = DomGeometry.position(mapDiv).w;
+                var  y = (DomGeometry.position(pageElement).y - DomGeometry.position(mapDiv).y + DomGeometry.position(pageElement).h / 2);
+
+                // Find corresponding feature:
+                var index = countryList.indexOf(pageElement.textContent);
+                var feature = featureLayer.graphics[index];
+
+                // set the start and end point for the arrow
+                var arrowFromPoint = new Point(x, y);
+                var arrowToPoint = feature.geometry.getExtent().getCenter();
+
+                // draw the arrow
+                if (arrowFromPoint && arrowToPoint) {
+                    var fromPoint = esriMap.toMap(arrowFromPoint);
+                    var mapArrow = new MapArrow(esriMap.spatialReference);
+                    var mapArrowPolygon = mapArrow.getArrowFromTo(fromPoint.x, fromPoint.y, arrowToPoint.x, arrowToPoint.y);
+
+                    // Clear old graphics and draw
+                    esriMap.graphics.clear();
+                    var graphic = new Graphic(mapArrowPolygon, graphicFillSymbol);
+                    esriMap.graphics.add(graphic);
+                }
+            }
+
+            function hide(evt) {
+                var pageElement = getEventTarget(evt);
+                pageElement.style.border = "solid 1px rgba(0,0,0,0)";
+                esriMap.graphics.clear();
+            }
+
+            function getEventTarget(evt) {
+                return ((window.event) ? (evt.srcElement) : (evt.target));
+            }
+
+        });
+    });
+</script>
+
+<body class="front">
+
+<div class="menuBar">
+    <div class="menu"><a href="./demo1.html">Demo 1</a></div>
+    <div class="menu"><a href="./demo2.html">Demo 2</a></div>
+    <div class="menu"><a href="./demo3.html">Demo 3</a></div>
+    <div class="menu"><a href="./demo4.html">Demo 4</a></div>
+    <div class="menu"><a href="./demo5.html">Demo 5</a></div>
+</div>
+
+<div id="container">
+
+    <div id="mapDiv" class="map_plus_content">
+    </div>
+
+    <div id="content" class="stmcontent">
+        <div id="header">Demo 5 - Drawing graphics</div>
+        <div id="placeHolder"
+             style="width: 340px; height: 500px;overflow:hidden; font-size: 11px; color: dimgray; padding: 10px; float: left"></div>
+    </div>
+</div>
+</body>
+</html>
